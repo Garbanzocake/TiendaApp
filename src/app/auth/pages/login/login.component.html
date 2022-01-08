@@ -1,10 +1,121 @@
-<mat-grid-list cols="1">
-    <mat-grid-tile>
-      <!-- (click)="login()" -->
-        <button mat-raised-button color="primary" >
-Ingresar
-  </button>
-    </mat-grid-tile>
-</mat-grid-list>
+<form
+  class="login100-form"
+  autocomplete="off"
+  [formGroup]="miFormulario"
+  (ngSubmit)="login()"
+>
+  <span class="login100-form-title p-b-49" > Login </span>
 
-<p>Login works</p>
+  <div class="wrap-input100 m-b-50" >
+    <span class="label-input100">Email</span>
+    <input
+      class="input100"
+      type="email"
+      formControlName="correo"
+      placeholder="Ingrese su email"
+    />
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 m-b-23" >
+    <span class="label-input100">Password</span>
+    <input
+      class="input100"
+      type="password"
+      formControlName="password"
+      placeholder="Ingrese su contraseña"
+    />
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="text-right pt-8 p-b-31" >
+  <div class="container-login100-form-btn">
+    <div class="wrap-login100-form-btn">
+      <div class="login100-form-bgbtn"></div>
+      <button
+        class="login100-form-btn"
+        type="submit"
+        [disabled]="miFormulario.invalid"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+</div>
+  <div class="flex-col-c p-t-60" >
+    <span class="txt1 p-b-17" > ¿No tienes cuenta? </span>
+
+    <a routerLink="/auth/registro" class="txt2"> Crear una aquí </a>
+  </div>
+
+  <!-- <div>
+    <h1>Google Sign in</h1>
+    <hr>
+
+    <div class="g-signin" data-onsuccess="onSignIn"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
+  </div> -->
+</form>
+
+
+<!-- Login google -->
+<p>hola</p>
+<div
+  id="g_id_onload"
+  data-client_id="777656063619-b6315q5btnanlf5vd4dqk1m80lrjvljh.apps.googleusercontent.com"
+  data-auto_prompt="false"
+  data-callback="handleCredentialResponse"
+></div>
+<div
+  class="g_id_signin"
+  data-type="standard"
+  data-shape="pill"
+  data-theme="filled_black"
+  data-text="$ {button.text}"
+  data-size="large"
+  data-logo_alignment="left"
+></div>
+
+<button id="google_signout">Sign Out</button>
+
+
+  <!-- //google login -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <script>
+    function handleCredentialResponse(response) {
+      // decodeJwtResponse() is a custom function defined by you
+      // to decode the credential response.
+      // const responsePayload = decodeJwtResponse(response.credential);
+      //Google token : ID_TOKEN
+      // console.log("id_token", response.credential);
+
+      const body = { id_token: response.credential };
+
+      fetch("http://localhost:8080/api/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((resp) => resp.json())
+        .then((resp) => {
+          localStorage.setItem("email", resp.usuario.correo);
+          localStorage.setItem('x-token', resp.token);
+          console.log(resp);
+        })
+        .catch(console.warn);
+    }
+
+    const button = document.getElementById("google_signout");
+
+    button.onclick = () => {
+      console.log(google.accounts.id);
+      google.accounts.id.disableAutoSelect();
+      google.accounts.id.revoke(localStorage.getItem("email"), (done) => {
+        localStorage.clear();
+        location.reload();
+      });
+    };
+  </script>

@@ -1,55 +1,105 @@
-<p>buscar works!</p>
-
 <div fxLayout="column">
   <div>
-    <h1> Buscador de Productos </h1>
+    <h1>Buscador de Productos</h1>
     <mat-divider></mat-divider>
   </div>
 
+  <div fxLayout="column">
+    <div #filtrosdiv>
+      <label id="example-radio-group-label"
+        >Selecciona forma de busqueda
+      </label>
+      <br />
 
-  <div fxLayout="column"  >
-    <h3>Buscador</h3>
+      <p-dropdown
+        [options]="filtros"
+        [(ngModel)]="tipoBusqueda"
+        optionLabel="name"
+        optionValue="cod"
+        [showTransitionOptions]="'0ms'"
+        [hideTransitionOptions]="'0ms'"
+      ></p-dropdown>
+      <br /><br />
+      <br />
 
-    <mat-form-field  >
-      <mat-label>Producto</mat-label>
-      <input type="text"
-             placeholder="Escribe el producto"
-             aria-label="Producto"
-             matInput
-             [(ngModel)]="termino"
-             [matAutocomplete]="auto"
-             (input)="buscando()"
+      <!-- <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="tipoBusqueda">
+        <mat-radio-button class="example-radio-button" *ngFor="let filtro of filtros" [value]="filtro">
+          {{filtro}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>Your favorite season is: {{tipoBusqueda}}</div> -->
+    </div>
 
-             >
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="opcionSeleccionada($event)">
-        <mat-option *ngFor="let producto of productos " [value]="producto ">
-          {{producto.nombre}}
+    <mat-form-field>
+      <mat-label>Productos</mat-label>
+
+      <input
+        *ngIf="tipoBusqueda === ''"
+        type="text"
+        placeholder="Escribe el producto"
+        aria-label="Producto"
+        matInput
+        [(ngModel)]="termino"
+        [matAutocomplete]="auto"
+        (input)="buscando()"
+      />
+
+      <input
+        *ngIf="tipoBusqueda === 'Categoria'"
+        type="text"
+        placeholder="Escribe la categoria"
+        aria-label="Categoria"
+        matInput
+        [(ngModel)]="termino"
+        [matAutocomplete]="auto"
+        (input)="buscando()"
+      />
+
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="opcionSeleccionada($event)"
+      >
+        <mat-option *ngFor="let producto of productos" [value]="producto">
+          {{ producto.nombre }}
         </mat-option>
 
-        <mat-option value="" *ngIf="productos.length === 0 && termino.trim().length > 0">
-          No se encontro nada con el termino {{termino}}
+        <mat-option
+          value=""
+          *ngIf="productos.length === 0 && termino.trim().length > 0"
+        >
+          No se encontro nada con el termino {{ termino }}
         </mat-option>
-
-
       </mat-autocomplete>
     </mat-form-field>
-
   </div>
 
   <div>
-    <pre>{{productoSeleccionado | json}}</pre>
-
-
+    <pre>{{ productoSeleccionado | json }}</pre>
   </div>
 
   <div fxLayout="row" *ngIf="productoSeleccionado">
-    <app-producto-tarjeta [producto]="productoSeleccionado"></app-producto-tarjeta>
-
+    <app-producto-tarjeta
+      [producto]="productoSeleccionado"
+    ></app-producto-tarjeta>
   </div>
 
-
+  <div
+    fxLayout="row wrap"
+    *ngIf="!productoSeleccionado"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="20px"
+  >
+    <div
+      fxflex="20"
+      fxFlex.lg="15"
+      fxFlex.sm="30"
+      *ngFor="let producto of productos"
+    >
+      <app-producto-tarjeta [productosCat]="producto"></app-producto-tarjeta>
+    </div>
+  </div>
 </div>
-
-
-
-

@@ -1,88 +1,169 @@
 <h1>
+  {{ !producto._id ? "Nuevo" : "Editar" }}
 
-  {{ (producto.nombre) ? 'Editar' : 'Nuevo' }}
-   Producto
-  <small>{{producto.nombre}}</small></h1>
+  Producto
+  <small>{{ producto.nombre }}</small>
+</h1>
 
-<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px">
-
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="40px"
+  style="margin-bottom: 40px"
+>
   <div fxFlex="50" fxLayout="column">
+    <div fxLayout="column" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex="100">
+        <mat-label>Nombre de Producto</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="producto.nombre"
+          required
+          [value]="producto.nombre"
+        />
+      </mat-form-field>
 
-      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex="100">
+        <mat-label>Precio </mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="producto.precio"
+          [value]="producto.precio"
+          required
+        />
+      </mat-form-field>
 
-          <mat-form-field fxFlex="100">
-              <mat-label>Nombre de Producto</mat-label>
-              <input matInput type="text"  required >
-              <!-- [(ngModel)]="producto." -->
+      <mat-form-field fxFlex="100">
+        <mat-label>Unidades </mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="producto.unidades"
+          [value]="producto.unidades"
+          min="0"
+          required
+        />
+      </mat-form-field>
 
-          </mat-form-field>
+     
 
+      <mat-form-field fxFlex="100">
+        <mat-label>Genero</mat-label>
+        <mat-select [(ngModel)]="producto.genero" required>
+          <mat-option
+            *ngFor="let genero of generoOpciones"
+            [value]="genero.id"
+          >
+            {{ genero.desc }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-          <mat-form-field fxFlex="100">
-              <mat-label>Precio </mat-label>
-              <input matInput type="number" required>
-              <!-- [(ngModel)]="heroe.alter_ego" -->
-          </mat-form-field>
+      <mat-form-field fxFlex="100">
+        <mat-label>Categoria</mat-label>
+        <mat-select [(ngModel)]="producto.categoria._id" required>
+          <mat-option
+            *ngFor="let categoria of categorias"
+            [value]="categoria._id"
+          >
+            {{ categoria.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <mat-label>Descripcion </mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="producto.descripcion"
+          [value]="producto.descripcion"
+        ></textarea>
+      </mat-form-field>
+
+      <!-- <app-chips></app-chips> -->
+
+      <div class="row" fxFlex="100">
+        <!-- class="form-label" -->
+
+        <!-- <mat-label class="form-label">Estilos/Tags :</mat-label>
+          <p-chips id="inputPassword5" [(ngModel)]="etiquetasInput"></p-chips> -->
+
+        <div class="col">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Estilos/Tags:
+          </label>
+          <br />
+          <p-chips id="inputPassword5" [(ngModel)]="etiquetasInput"></p-chips>
+        </div>
+
+        <div class="col">
+          <label class="form-label">Tallas:</label>
+          <br />
+          <p-chips [(ngModel)]="tallasInput" ></p-chips>
+        </div>
       </div>
+    </div>
 
+    <br />
 
-      <mat-form-field>
-          <mat-label>Primer Aparicion </mat-label>
-          <input matInput type="text" required>
-          <!-- [(ngModel)]="heroe.first_appearance" -->
-      </mat-form-field>
+    <!-- Botones de crear o editar -->
 
-      <mat-form-field>
-          <mat-label>Personajes</mat-label>
-          <input matInput type="text" required >
-          <!-- [(ngModel)]="heroe.characters" -->
-      </mat-form-field>
-
-      <mat-form-field>
-          <mat-label>Categoria</mat-label>
-          <mat-select  required>
-            <!-- [(ngModel)]="producto.categoria" -->
-              <mat-option *ngFor="let categoria of categorias" [value]="categoria._id" >
-
-                  {{categoria.nombre}}
-              </mat-option>
-          </mat-select>
-      </mat-form-field>
-
-
-      <mat-form-field>
-          <mat-label>Foto Url</mat-label>
-          <input matInput type="url"  required>
-          <!-- [(ngModel)]="heroe.alt_img" -->
-      </mat-form-field>
-
-      <!-- <mat-form-field>
-        <mat-label>Foto Url</mat-label>
-        <input matInput type="url" [(ngModel)]="heroe.alt_img" required>
-    </mat-form-field> -->
-
-
-      <br>
-
-      <div fxLayout>
-          <button mat-raised-button color="primary" (click)="guardar()">
-        <mat-icon>save</mat-icon>
-        <!-- {{ (heroe.id) ? 'Actualizar' : 'Crear' }} -->
+    <div class="" fxLayout>
+      <button mat-raised-button color="primary" (click)="guardar()">
+        <mat-icon *ngIf="!producto._id">save</mat-icon>
+        <mat-icon *ngIf="producto._id">edit</mat-icon>
+        {{ !producto._id ? "Crear" : "Actualizar" }}
       </button>
 
-          <span class="spacer"></span>
-          <button mat-raised-button color="warn"  (click)="borrar()">
-            <!-- *ngIf="heroe.id" -->
-            <mat-icon>remove</mat-icon>
-          Borrar
-        </button>
+      <span class="spacer"></span>
+      <button
+        *ngIf="producto._id"
+        mat-raised-button
+        color="warn"
+        (click)="borrar()"
+      >
+        <!-- *ngIf="heroe.id" -->
+        <mat-icon>delete</mat-icon>
+        Borrar
+      </button>
+      <span class="spacer"></span>
+      <button
+        *ngIf="producto._id"
+        mat-raised-button
+        color="warn"
+        (click)="limpiarImagenes()"
+      >
+        <!-- *ngIf="heroe.id" -->
+        <mat-icon>delete</mat-icon>
+        Limpiar Imagenes
+      </button>
+    </div>
+
+    <br />
+
+    <!-- FileUpload -->
+    <div
+      *ngIf="producto._id"
+      fxLayout="column"
+      fxLayout.xs="column"
+      fxLayoutGap="20px"
+    >
+      <div class="card">
+        <!-- <app-file-upload [producto]="producto"></app-file-upload> -->
+        <app-cargar-archivo [producto]="producto"></app-cargar-archivo>
       </div>
-
+    </div>
   </div>
 
-  <div fxFlex="50">
-      <img [src]="producto | imagen " alt="">
+  <div fxFlex="50" fxLayout="column">
+    <div fxFlex="100" fxLayout="column">
+      <img [src]="producto | imagen" alt="" />
+    </div>
   </div>
-
-
 </div>
+
+<!-- <br>
+
+<app-listado style="margin-top:20px;" ></app-listado> -->

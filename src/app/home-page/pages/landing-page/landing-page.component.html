@@ -1,3 +1,63 @@
-<p>landing-page works!</p>
+<div class="container-fluid p-0">
+  <div
+    class="
+      container-fluid
+      background
+      animate__animated animate__fadeIn animate__delay-1s
+    "
+  >
+    <!-- navbar -->
 
-<app-carousel [productos]="productos"  ></app-carousel>
+    <div class="container-fluid p-0 m-0">
+      <div class="row">
+        <app-navbar></app-navbar>
+      </div>
+    </div>
+    <!-- navbar -->
+
+    <div class="container-fluid p-0 m-0 d-block">
+      <div class="row align-items-center">
+        <div
+          class="
+            col-12 col-sm-3 col-md-3 col-lg-3
+            container-fluid
+            d-flex
+            justify-content-center
+            align-items-center
+          "
+        >
+          <app-moon></app-moon>
+        </div>
+
+        <div
+          class="
+            col-12 col-sm-9 col-md-9 col-lg-9
+            p-0
+            m-0
+            container-fluid
+            align-items-center
+          "
+        >
+          <!-- d-flex align-self-center align-middle -->
+          <div class="row justify-content-center p-0 m-0">
+            <div
+              class="col-3 animate__animated animate__flipInX animate__delay-2s"
+            >
+              <img
+                class="img-logo d-none d-md-block"
+                src="../../../../assets/img/UIBlitz/logoblitz.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid p-0">
+    <app-carousel [productosAll]="productos" [termino]="''"></app-carousel>
+  </div>
+
+  <app-footerpublic></app-footerpublic>
+</div>

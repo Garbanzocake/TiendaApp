@@ -1,56 +1,72 @@
-<mat-sidenav-container fullscreen>
-  <mat-sidenav #sidenav mode="push">
+<div
+  class="
 
-    <mat-toolbar color="primary">
-      <span>Menu</span>
+    animate__animated animate__fadeInLeft animate__delay-1s
+  "
+>
+  <mat-sidenav-container style="height: 100vh;">
+    <mat-sidenav #sidenav mode="push">
+      <mat-toolbar color="primary">
+        <span>Menu</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
 
-      <span class="spacer"></span>
+      <mat-nav-list>
+        <a routerLink="../store/tienda" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">home</mat-icon>
+          <span>HomePage</span>
+        </a>
+        <a routerLink="./listado" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">label</mat-icon>
+          <span>Listado de Productos</span>
+        </a>
 
+        <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">add</mat-icon>
+          <span>Agregar Productos</span>
+        </a>
+
+        <a routerLink="./buscar" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">search</mat-icon>
+          <span>Buscar Productos</span>
+        </a>
+
+        <a routerLink="../stickers" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">fireplace</mat-icon>
+          <span>Administrar Stickers</span>
+        </a>
+
+        <a routerLink="../pedidos" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">receipt_long</mat-icon>
+          <span>Administrar Pedidos</span>
+        </a>
+      </mat-nav-list>
+
+
+    </mat-sidenav>
+
+    <mat-toolbar>
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+
+      <span class="spacer"></span>
+
+      <h2>Hola {{ usuario.nombre }} !</h2>
+
+      <button mat-button (click)="logOut()">
+        Cerrar Sesion
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
 
-    <mat-nav-list>
-      <a routerLink="../home-page/" mat-list-item (click)="sidenav.toggle()">
-        <mat-icon mat-list-icon color="primary">home</mat-icon>
-        <span>HomePage</span>
-      </a>
-      <a routerLink="./listado" mat-list-item (click)="sidenav.toggle()">
-        <mat-icon mat-list-icon color="primary">label</mat-icon>
-        <span>Listado de Productos</span>
-      </a>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
+</div>
 
-      <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()">
-        <mat-icon mat-list-icon color="primary">add</mat-icon>
-        <span>Agregar Productos</span>
-      </a>
-
-      <a routerLink="./buscar" mat-list-item (click)="sidenav.toggle()">
-        <mat-icon mat-list-icon color="primary">search</mat-icon>
-        <span>Buscar Productos</span>
-      </a>
-
-
-    </mat-nav-list>
-
-  </mat-sidenav>
-
-
-  <mat-toolbar>
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <span class="spacer"></span>
-
-    <button mat-button>Log Out</button>
-  </mat-toolbar>
-
-  <div class="container">
-
-    <router-outlet></router-outlet>
-  </div>
-
-
-</mat-sidenav-container>
+<!-- <pre>{{usuario | json}}</pre> -->

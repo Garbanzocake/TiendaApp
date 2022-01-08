@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
-import { Result } from '../../interface/resultados.interface';
-import { ProductoElement  } from '../../interface/productos.interface';
+import { Result } from '../../../interfaces/resultados.interface';
+
 import { ProductosService } from '../../services/productos.service';
+import { Producto } from '../../../interfaces/producto.interface';
 
 @Component({
   selector: 'app-buscar',
@@ -15,43 +16,74 @@ export class BuscarComponent implements OnInit {
 
   productos: Result[] = [];
 
-  productoSeleccionado: ProductoElement | undefined;
+  // productosCat: Producto[]=[];
 
-  constructor(private productosService: ProductosService) {}
+  productoSeleccionado: Producto | undefined;
+
+  tipoBusqueda: string = '';
+  // ['Categoria', 'Producto'];
+  filtros: any[];
+
+  constructor(private productosService: ProductosService) {
+    this.filtros = [
+      {
+        name: 'Seleccione opcion',
+        cod: '',
+      },
+      {
+        name: 'Categoria',
+        cod: 'Categoria',
+      },
+    ];
+  }
 
   ngOnInit(): void {}
 
-  buscando() {
-
-    if (!this.termino ) {
+  opcionSeleccionada(event: MatAutocompleteSelectedEvent) {
+    if (!event.option.value) {
+      this.productoSeleccionado = undefined;
       this.productos = [];
+      console.log('No hay valor');
       return;
-    }else{
+    }
 
+    const producto: Result = event.option.value;
+    this.termino = producto.nombre;
+
+    if (this.tipoBusqueda === 'Categoria') {
+      this.productosService
+        .getProductosPorCategoria(this.termino.trim())
+        .subscribe(({ results }) => {
+          this.productos = results;
+        });
+    } else {
       this.productosService
         .getProductosPortermino(this.termino.trim())
-        .subscribe(( {results} ) => {
-          this.productos= results;
+        .subscribe(({ results }) => {
+          this.productos = results;
         });
     }
   }
 
-  opcionSeleccionada(event: MatAutocompleteSelectedEvent){
-
-
-
-      if (!event.option.value) {
-        this.productoSeleccionado = undefined;
-        console.log('No hay valor')
-        return;
+  buscando() {
+    this.productos = [];
+    if (!this.termino) {
+      this.productos = [];
+      return;
+    } else {
+      if (this.tipoBusqueda === 'Categoria') {
+        this.productosService
+          .getProductosPorCategoria(this.termino.trim())
+          .subscribe(({ results }) => {
+            this.productos = results;
+          });
+      } else {
+        this.productosService
+          .getProductosPortermino(this.termino.trim())
+          .subscribe(({ results }) => {
+            this.productos = results;
+          });
       }
-
-      const producto:Result= event.option.value;
-      this.termino= producto.nombre ;
-
-      this.productosService.getProductoPorId(producto._id)
-      .subscribe(({producto})  =>this.productoSeleccionado = producto)
-
-
+    }
   }
 }

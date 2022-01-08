@@ -1,14 +1,27 @@
-.product-item {
-  .product-item-content {
-      border: 1px solid var(--surface-d);
-      border-radius: 3px;
-      margin: .3rem;
-      text-align: center;
-      padding: 2rem 0;
-  }
+.background {
 
-  .product-image {
-      width: 50%;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
-  }
+  height: 100vh;
+  // background-image: url("../../../../assets/img/UIBlitz/Cielosinluna.png");
+  background-image: url("https://res.cloudinary.com/dxxz2xazt/image/upload/v1632188380/TiendaApp/Recursos/Cielosinluna_o5crch.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.img-logo {
+  display: flex;
+  max-width: 100%;
+  max-height: 12.25rem;
+  border-radius: 300px;
+}
+
+
+ .footer{
+   position: fixed;
+  bottom: 0;
+
+
+   left: 0;
+  right: 0;
 }

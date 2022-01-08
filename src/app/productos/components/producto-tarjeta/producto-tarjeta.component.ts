@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductoElement } from '../../interface/productos.interface';
+import { Result } from 'src/app/interfaces/resultados.interface';
+
+import { Producto } from '../../../interfaces/producto.interface';
+
 
 @Component({
   selector: 'app-producto-tarjeta',
@@ -18,7 +21,9 @@ import { ProductoElement } from '../../interface/productos.interface';
 
 export class ProductoTarjetaComponent implements OnInit {
 
-  @Input()producto!:ProductoElement ;
+  @Input()producto!:Producto ;
+  @Input()productosCat!:Result ;
+  @Input()modo!:string; //recibe admin o user
 
   constructor() { }
 

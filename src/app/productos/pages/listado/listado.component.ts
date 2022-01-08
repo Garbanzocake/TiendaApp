@@ -1,33 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import {  ProductoElement } from '../../interface/productos.interface';
+import { AuthService } from 'src/app/auth/services/auth.service';
+
 import { ProductosService } from '../../services/productos.service';
 
+import { Producto } from '../../../interfaces/producto.interface';
 
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styles: [
-
-  ],
+  styles: [],
 })
 export class ListadoComponent implements OnInit {
+  productos: Producto[] = [];
 
-  productos: ProductoElement[] = [];
+  get usuario() {
+    return this.authService.usuario;
+  }
 
-  constructor(private productosService: ProductosService) {}
+  constructor(
+    private productosService: ProductosService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    // this.productosService.getHeroes().pipe(
-    //   map(res => res[0].productos)
-    // )
-    // .subscribe( resproductos => {
-    //          this.productos= resproductos;
-    // });
-
-    this.productosService.getProductos().subscribe(({productos}) => {
-
-      console.log(productos);
-      this.productos= productos;
+    this.productosService.getProductos().subscribe(({ productos }) => {
+      // console.log(productos);
+      this.productos = productos;
     });
   }
 }

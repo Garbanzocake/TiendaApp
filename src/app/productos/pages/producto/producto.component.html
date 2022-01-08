@@ -1,52 +1,59 @@
-<mat-grid-list cols="1" *ngIf="!producto ; else divProducto">
+<mat-grid-list cols="1" *ngIf="!producto; else divProducto">
   <mat-grid-tile>
-
     <mat-spinner></mat-spinner>
   </mat-grid-tile>
 </mat-grid-list>
 
-
 <ng-template #divProducto>
-
   <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
-
     <div fxFlex="50">
-      <h1>{{producto.nombre}} </h1>
+      <h1>{{ producto.nombre }}</h1>
       <mat-divider></mat-divider>
-      <br>
-      <img [src]="producto | imagen" alt="">
+      <br />
+      <!-- <img [src]="producto | imagen" alt=""> -->
 
-
-
-
+      <app-galleria-producto
+        [productoGalleria]="producto"
+      ></app-galleria-producto>
     </div>
 
     <div fxFlex="50">
-      <h1>Categoria <small>- {{producto.categoria.nombre}}</small></h1>
+      <h1>
+        Categoria <small>- {{ producto.categoria.nombre }}</small>
+      </h1>
       <mat-divider></mat-divider>
 
       <mat-list>
         <mat-list-item>
-
-          <p> <Strong>Coste:</Strong> <small> {{producto.precio}}</small></p>
+          <p>
+            <Strong>Coste:</Strong> <small> {{ producto.precio }}</small>
+          </p>
         </mat-list-item>
         <mat-list-item>
-          <h3> </h3>
+          <p>
+            <Strong>Descripcion:</Strong>
+            <small> {{ producto.descripcion }}</small>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <h3></h3>
 
-          <p> <Strong>Disponibilidad:</Strong> <small> {{producto| disponibleItem}}</small></p>
+          <p>
+            <Strong>Disponibilidad:</Strong>
+            <small> {{ producto | disponibleItem }}</small>
+          </p>
         </mat-list-item>
       </mat-list>
 
-      <br>
+      <br />
 
       <button mat-button color="warn" (click)="regresar()">Regresar</button>
 
+      <!-- <div id="zoom-img">
+
+        </div> -->
+
     </div>
-
-
   </div>
-
-
-
-
 </ng-template>
+

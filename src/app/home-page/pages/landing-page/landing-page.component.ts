@@ -1,32 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoElement } from '../../../productos/interface/productos.interface';
 import { ProductosService } from '../../../productos/services/productos.service';
+import { Producto } from '../../../interfaces/producto.interface';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
+  productos: Producto[] = [];
 
-  productos: ProductoElement[]=[];
-
-
-
-  constructor(private productosService:ProductosService) {
-
-   }
+  constructor(private productosService: ProductosService) {}
 
   ngOnInit(): void {
-
-
-
-    this.productosService.getProductos().subscribe((producto) => {
-
-      console.log(producto.productos);
-      this.productos= producto.productos;
+    this.productosService.getProductos().subscribe((resp) => {
+      this.productos = resp.productos;
+      // console.log("productos de lading",this.productos);
     });
-
   }
-
 }

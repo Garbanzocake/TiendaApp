@@ -1,10 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  margin:0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 html,
 body {
-    margin: 10px;
+    margin: 0;
     height: 100%;
-    background-color: var(--surface-b);
+    background-color: #ffffff ;
+    /* var(--surface-b) */
+
     font-family: var(--font-family);
 }
 
@@ -18,3 +25,50 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .spacer {
   flex: 1 1 auto;
 }
+
+.img{
+  width:100%;
+  border-radius: 5px;
+}
+
+
+@font-face {
+  font-family: noTalking;
+  src: url("./assets/fonts/no-talking-allowed.ttf");
+}
+
+
+@font-face {
+  font-family: ocra-bt;
+  src: url("./assets/fonts/ocra-bt.ttf");
+}
+
+
+.p1Servicios {
+  font-family: noTalking;
+  font-size: 3.125rem;
+  color: white;
+}
+.p2Tienda {
+  font-family: noTalking;
+  font-size: 3.125rem;
+  color: black;
+}
+
+
+.p1ServiciosSmall {
+  font-family: noTalking;
+  font-size: 1.5625rem;
+  color: white;
+}
+.p2TiendaSmall {
+  font-family: noTalking;
+  font-size: 1.5625rem;
+  color: black;
+}
+
+.font-Ocra{
+  font-family: ocra-bt;
+}
+
+

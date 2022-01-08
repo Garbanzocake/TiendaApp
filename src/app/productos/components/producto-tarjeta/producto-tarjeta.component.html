@@ -1,4 +1,4 @@
-<mat-card >
+<mat-card *ngIf="producto" >
   <mat-card-header>
     <mat-card-title>{{producto.nombre}}</mat-card-title>
     <mat-card-subtitle>{{producto.categoria.nombre}}</mat-card-subtitle>
@@ -9,7 +9,7 @@
 
   <mat-card-content>
     <h3> <strong>Precio</strong> </h3>
-    <p>{{producto.precio | currency}}</p>
+    <p>{{producto.precio | currency:'COP$':'symbol':'5.0-2' }} </p>
 
     <h3> <strong>Disponibilidad</strong></h3>
     <p>{{producto | disponibleItem}}</p>
@@ -20,7 +20,7 @@
     <button mat-button [routerLink]="['/productos',producto._id]" color="primary">
       Ver Producto
     </button>
-    <button mat-button [routerLink]="['/productos/editar',producto._id]"  color="secondary">
+    <button *ngIf="!modo " mat-button [routerLink]="['/productos/editar',producto._id]"  color="secondary">
       Editar Producto
     </button>
   </mat-card-actions>
@@ -28,3 +28,32 @@
 
 </mat-card>
 
+<mat-card *ngIf="productosCat" >
+  <mat-card-header>
+    <mat-card-title>{{productosCat.nombre}}</mat-card-title>
+    <mat-card-subtitle>{{productosCat.categoria.nombre}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <!-- <img mat-card-image src="{{producto.img}}" alt=""> -->
+  <img mat-card-image [src]="productosCat | imagen" alt="">
+
+  <mat-card-content>
+    <h3> <strong>Precio</strong> </h3>
+    <p>{{productosCat.precio | currency:'COP$':'symbol':'5.0-2' }} </p>
+
+    <h3> <strong>Disponibilidad</strong></h3>
+    <p>{{productosCat | disponibleItem}}</p>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button [routerLink]="['/productos',productosCat._id]" color="primary">
+      Ver Producto
+    </button>
+    <button *ngIf="!modo " mat-button [routerLink]="['/productos/editar',productosCat._id]"  color="secondary">
+      Editar Producto
+    </button>
+  </mat-card-actions>
+
+
+</mat-card>
