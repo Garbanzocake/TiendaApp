@@ -1,0 +1,58 @@
+<div
+  class="
+    container-fluid
+    animate__animated animate__fadeIn animate__delay-1s
+    col-12
+    d-block d-sm-none
+    p-b-3
+  "
+>
+  <!-- <app-carousel [termino]="termino"></app-carousel> -->
+
+
+  <div *ngIf="termino === 'JEANS' "  >
+      <app-galleria-productos [termino]="termino"></app-galleria-productos>
+ </div>
+
+ <div *ngIf="termino === 'CAMISETAS'">
+  <app-galleria-productos [termino]="termino"></app-galleria-productos>
+</div>
+
+ <div *ngIf="termino === 'CROPTOPS'"  >
+  <app-galleria-productos [termino]="termino"></app-galleria-productos>
+</div>
+
+
+
+
+
+
+
+  <p-carousel
+    [value]="categorias"
+    [numVisible]="1"
+    [numScroll]="1"
+    [page]="1"
+    [circular]="true"
+    showIndicators="true"
+    [responsiveOptions]="responsiveOptions"
+
+  >
+    <ng-template let-categoria pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="col">
+            <!-- (click)="emitirCategoria(categoria.nombre)" -->
+            <a
+              style="text-decoration: none; cursor: pointer; color: gray"
+              mat-list-item
+              (click)="emitirCategoria(categoria.nombre)"
+
+              >{{ categoria.nombre }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>

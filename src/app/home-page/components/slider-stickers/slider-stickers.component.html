@@ -1,0 +1,36 @@
+<div class="container-fluid m-0 p-0">
+<h1>Galleria de Stickers</h1>
+<mat-divider></mat-divider>
+<br />
+
+
+  <div class="row  m-0 p-0">
+    <div
+      *ngFor="let item of stickers"
+      class="col-12 col-sm-2 mb-4 d-flex flex-wrap"
+    >
+      <div>
+        <h2>{{ item.nombre }}</h2>
+        <img
+          class="img-fluid"
+          src="{{ item.img }}"
+          oncontextmenu="return false"
+          alt="{{ item.nombre }}"
+        />
+
+        <div class="row d-inline">
+          <button
+            mat-button
+            [routerLink]="['/sticker', item._id]"
+            color="primary"
+          >
+            Ver Sticker
+          </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

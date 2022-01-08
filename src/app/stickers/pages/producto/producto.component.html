@@ -1,0 +1,59 @@
+<mat-grid-list cols="1" *ngIf="!sticker; else divProducto">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divProducto>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px">
+    <div fxFlex="50">
+      <h1>{{ sticker.nombre }}</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <!-- <img [src]="producto | imagen" alt=""> -->
+
+      <app-galleria-producto
+        [productoGalleria]="sticker"
+      ></app-galleria-producto>
+    </div>
+
+    <div fxFlex="50">
+      <h1>
+        Categoria <small>- {{ sticker.nombre }}</small>
+      </h1>
+      <mat-divider></mat-divider>
+
+      <mat-list>
+        <mat-list-item>
+          <p>
+            <Strong>Coste:</Strong> <small> {{ sticker.precio }}</small>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>
+            <Strong>Artista:</Strong>
+            <small> {{ sticker.artista }}</small>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <h3></h3>
+
+          <p>
+            <Strong>Disponibilidad:</Strong>
+            <small> {{ sticker | disponibleItem }}</small>
+          </p>
+        </mat-list-item>
+      </mat-list>
+
+      <br />
+
+      <button mat-button color="warn" (click)="regresar()">Regresar</button>
+
+      <!-- <div id="zoom-img">
+
+        </div> -->
+
+    </div>
+  </div>
+</ng-template>
+

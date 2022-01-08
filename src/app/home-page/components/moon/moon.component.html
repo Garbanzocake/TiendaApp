@@ -1,0 +1,69 @@
+<div class="container-fluid d-none d-sm-block p-0 border-0">
+  <div
+    class="
+      row
+      align-items-center
+      animate__animated animate__fadeInLeft animate__delay-1s
+      d-flex
+      justify-content-center
+      p-0
+    "
+  >
+    <!-- bomba no sale en movil  -->
+    <a
+      class="d-block"
+      (click)="onClickedBomb()"
+      *ngIf="estadoLuna === 'cohete'"
+    >
+      <img
+        id="bombaimg1"
+        class="img-bomb"
+        src="../../../../assets/img/UIBlitz/intrologobomba.png"
+        alt=""
+      />
+    </a>
+    <!-- bomba no sale en movil  -->
+
+    <a
+      *ngIf="estadoLuna === 'tienda'"
+      class="nav-link moon-texts p2Tienda"
+      routerLink="/store/tienda"
+    >
+      TIENDA
+    </a>
+    <!-- Textos de luna -->
+
+    <!-- Luna fondo -->
+    <img
+      class="img-moon"
+      src="../../../../assets/img/UIBlitz/luna.png"
+      alt=""
+    />
+  </div>
+</div>
+
+<!-- container-fluid d-none d-sm-block p-0 border-0 -->
+<div class="container-fluid p-0 border-0 d-block d-sm-none">
+  <!--  -->
+  <div class="col-12">
+    <img
+      *ngIf="estadoLuna !== 'tienda'"
+      class="img-moon-middle animate__animated animate__headShake animate__infinite"
+      src="../../../../assets/img/UIBlitz/lunablitzsolo.png"
+      alt=""
+    />
+  </div>
+</div>
+
+
+<div class="container-fluid p-0 border-0 d-block d-sm-none">
+
+  <div class="col-12">
+    <img
+      *ngIf="estadoLuna === 'tienda'"
+      class="img-moon-store animate__animated animate__fadeIn"
+      src="../../../../assets/img/UIBlitz/lunablitzsolo.png"
+      alt=""
+    />
+  </div>
+</div>

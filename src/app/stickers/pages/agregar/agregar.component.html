@@ -1,0 +1,113 @@
+<h1>
+  {{ !sticker._id ? "Nuevo" : "Editar" }}
+
+  Sticker
+  <small>{{ sticker.nombre }}</small>
+</h1>
+
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="40px"
+  style="margin-bottom: 40px"
+>
+  <div fxFlex="50" fxLayout="column">
+    <div fxLayout="column" fxLayout.xs="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex="100">
+        <mat-label>Nombre de Sticker</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="sticker.nombre"
+          required
+          [value]="sticker.nombre"
+        />
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <mat-label>Precio </mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="sticker.precio"
+          [value]="sticker.precio"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field fxFlex="100">
+        <mat-label>Artista </mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="sticker.artista"
+          [value]="sticker.artista"
+          required
+        ></textarea>
+      </mat-form-field>
+
+      <!-- <app-chips></app-chips> -->
+
+      <div class="row" fxFlex="100"></div>
+    </div>
+
+    <br />
+
+    <!-- Botones de crear o editar -->
+
+    <div class="" fxLayout>
+      <button mat-raised-button color="primary" (click)="guardar()">
+        <mat-icon *ngIf="!sticker._id">save</mat-icon>
+        <mat-icon *ngIf="sticker._id">edit</mat-icon>
+        {{ !sticker._id ? "Crear" : "Actualizar" }}
+      </button>
+
+      <span class="spacer"></span>
+      <button
+        *ngIf="sticker._id"
+        mat-raised-button
+        color="warn"
+        (click)="borrar()"
+      >
+        <!-- *ngIf="heroe.id" -->
+        <mat-icon>delete</mat-icon>
+        Borrar
+      </button>
+      <span class="spacer"></span>
+      <button
+        *ngIf="sticker._id"
+        mat-raised-button
+        color="warn"
+        (click)="limpiarImagenes()"
+      >
+        <!-- *ngIf="heroe.id" -->
+        <mat-icon>delete</mat-icon>
+        Limpiar Imagenes
+      </button>
+    </div>
+
+    <br />
+
+    <!-- FileUpload -->
+    <div
+      *ngIf="sticker._id"
+      fxLayout="column"
+      fxLayout.xs="column"
+      fxLayoutGap="20px"
+    >
+      <div class="card">
+        <!-- <app-file-upload [producto]="producto"></app-file-upload> -->
+        <app-cargar-archivo [producto]="sticker"></app-cargar-archivo>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="50" fxLayout="column">
+    <div fxFlex="100" fxLayout="column">
+      <img [src]="sticker | imagen" alt="" />
+    </div>
+  </div>
+</div>
+
+<!-- <br>
+
+<app-listado style="margin-top:20px;" ></app-listado> -->

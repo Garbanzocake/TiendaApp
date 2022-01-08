@@ -1,0 +1,62 @@
+.img-moon {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.img-moon-middle {
+  display: flex;
+
+  width: 100%;
+  margin-top: 140px;
+
+}
+
+.img-moon-store {
+  display: flex;
+
+  width: 100%;
+  /* margin-top: 140px; */
+}
+
+
+.img-bomb {
+  display: flex;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 300px;
+}
+
+.img-logo {
+  display: flex;
+  position: absolute;
+
+  /* max-width: 100%;
+  height: 12.25rem; */
+  width: 80%;
+  height: 80%;
+  top: 40px;
+  left: 40px;
+  border-radius: 300px;
+}
+
+.img-logo2 {
+  display: flex;
+  position: absolute;
+
+  /* max-width: 100%;
+  height: 12.25rem; */
+  width: 80%;
+  height: 80%;
+  top: 40px;
+  /* left: 40px; */
+  border-radius: 300px;
+}
+
+.moon-texts {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+}

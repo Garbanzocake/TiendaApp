@@ -1,0 +1,178 @@
+<div class="row m-0 p-0">
+  <div class="col-5 m-0 p-0 animate__animated animate__fadeIn animate__delay-1s">
+    <h1>{{ !venta._id ? "Nueva" : "Editar" }} Venta</h1>
+    <form (ngSubmit)="''" [formGroup]="miFormulario">
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Cliente de la venta</mat-label>
+          <input matInput type="text" formControlName="correo" required />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Telefono de la venta</mat-label>
+          <input matInput type="text" formControlName="telefono" required />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Direccion de entrega</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="direccion"
+            placeholder="Direccion"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Detalle direccion de entrega</mat-label>
+          <textarea
+            matInput
+            type="text"
+            formControlName="detalleDireccion"
+            required
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field appearance="fill" fxFlex="100">
+          <mat-label>Fecha de creacion de la venta</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fecha"
+            [value]="venta.fecha"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Subtotal de la venta</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="subtotal"
+            required
+            [value]="venta.subtotal"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Envio</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="envio"
+            required
+            [value]="venta.envio"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Total de la venta</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="total"
+            required
+            [value]="venta.total"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Estado de Venta</mat-label>
+          <mat-select formControlName="completada" required>
+            <mat-option *ngFor="let estado of estadoVenta" [value]="estado.id">
+              {{ estado.desc }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="venta.fechaEntrega; else sinFechaEntrega" class="mb-2 p-0">
+        <mat-form-field appearance="fill" fxFlex="100">
+          <mat-label>Fecha de entregado de la venta</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="fechaEntrega"
+            [value]="venta.fechaEntrega"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <ng-template #sinFechaEntrega>
+        <h2>Fecha Entrega:</h2>
+        <p>Aun no se ha completado la venta</p>
+      </ng-template>
+
+
+
+
+      <div class="container-fluid mb-4 p-0">
+        <div class="col">
+          <label for="pedidos-ids" class="form-label">Pedidos/IDS: </label>
+          <!-- <br /> -->
+          <p-chips id="inputPedidos" formControlName="pedidos"></p-chips>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-4">
+            <button mat-raised-button color="primary" type="submit" (click)="guardarVenta()">
+              <mat-icon *ngIf="!venta._id">save</mat-icon>
+              <mat-icon *ngIf="venta._id">edit</mat-icon>
+              {{ !venta._id ? "Crear" : "Actualizar" }}
+            </button>
+          </div>
+
+          <div class="col-4">
+            <button
+              *ngIf="venta._id"
+              mat-raised-button
+              color="warn"
+              (click)="borrar(venta)"
+            >
+              <!-- *ngIf="heroe.id" -->
+              <mat-icon>delete</mat-icon>
+              Borrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-7 m-0 p-0 animate__animated animate__fadeIn animate__delay-1s">
+    <h2>Articulos del pedido</h2>
+    <app-tabla-pedidos
+      *ngIf="venta._id"
+      [idVenta]="venta._id"
+      (onIdPedidoDelete)="borrarPedido($event)"
+    ></app-tabla-pedidos>
+  </div>
+</div>

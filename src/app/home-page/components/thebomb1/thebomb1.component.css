@@ -1,0 +1,22 @@
+.img-bomb{
+  display: flex;
+
+  width: 100%;
+  max-height: 31.25rem;
+  border-radius: 300px;
+  --animate-repeat: 2;
+
+}
+
+
+
+
+
+.background{
+  display: flex;
+  /* background-color: #FAFAFA; */
+  background-color: #FFFFFF;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}

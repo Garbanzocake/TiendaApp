@@ -1,0 +1,18 @@
+
+a {
+  cursor: pointer;
+}
+
+.img-navbar {
+  display: flex;
+  width: 100px;
+  height: 100px;
+
+  background-size: cover;
+}
+
+
+.shake:hover {
+  animation: headShake;
+  animation-duration: 1s;
+}

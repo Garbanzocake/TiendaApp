@@ -1,0 +1,16 @@
+img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+
+#zoom-img {
+  width: 600px;
+  height: 338px;
+  background: url("https://th.bing.com/th/id/OIP.fC66s6_UVJDGblsHRO50ngHaFe?pid=ImgDet&rs=1");
+  background-position: center;
+  background-size: cover;
+}
+
+
+

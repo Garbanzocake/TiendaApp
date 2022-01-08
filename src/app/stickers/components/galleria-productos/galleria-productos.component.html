@@ -1,0 +1,52 @@
+<p-galleria
+  [value]="productos"
+  #galleria
+  [(activeIndex)]="activeIndex"
+  [numVisible]="5"
+  [circular]="true"
+  [responsiveOptions]="responsiveOptions"
+  [containerStyle]="{ 'max-width': '800px' }"
+  [containerClass]="galleriaClass()"
+  [showItemNavigators]="false"
+>
+  <ng-template pTemplate="item" let-item>
+    <img
+      class="animate__animated animate__fadeIn animate__delay-1s "
+      [src]="item.img"
+      style="width: 100%; display: block"
+    />
+  </ng-template>
+
+  <ng-template pTemplate="thumbnail" let-item>
+    <div class="p-grid p-nogutter p-justify-center">
+      <img [src]="item.img" class="img-mini" />
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer" let-item>
+    <div
+      class="
+        container-fluid
+        custom-galleria-footer
+        animate__animated animate__fadeIn animate__delay-1s
+        d-flex
+        justify-content-center
+      "
+    >
+      <div
+        *ngIf="productos"
+        class="title-container row d-flex justify-content-center"
+      >
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Ver mas..."
+          class="p-button-info"
+          [routerLink]="['/store', productos[activeIndex]._id]"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-galleria>
+
+

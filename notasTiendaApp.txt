@@ -1,0 +1,7 @@
+Uso de api whatsapp para redireccionar a mensaje directo
+
+https://api.whatsapp.com/send?phone=573172172682&text=Hola
+https://api.whatsapp.com/send?phone=573223080414&text=Hola
+
+ejemplo
+https://api.whatsapp.com/send?phone=5493516342592&text=Hola!%20Quiero%20generar%20mas%20ventas!

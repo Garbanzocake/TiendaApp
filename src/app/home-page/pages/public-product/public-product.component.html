@@ -1,0 +1,147 @@
+<mat-grid-list cols="1" *ngIf="!producto; else divProducto">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divProducto>
+  <!-- Menu navbar -->
+  <div class="container-fluid p-0 m-0 col-12">
+    <app-menu [itemsCarrito]="itemsCarrito"></app-menu>
+  </div>
+  <div
+    class="m-0 p-0 animate__animated animate__fadeIn animate__delay-1s"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutGap="30px"
+  >
+    <div fxFlex="50" class="container-fluid m-0 p-0">
+      <h1>{{ producto.nombre }}</h1>
+      <mat-divider></mat-divider>
+      <br />
+      <!-- <img [src]="producto | imagen" alt=""> -->
+
+      <div class="">
+        <app-galleria-producto
+          [productoGalleria]="producto"
+        ></app-galleria-producto>
+      </div>
+    </div>
+
+    <div fxFlex="50">
+      <h1>
+        Categoria <small>- {{ producto.categoria.nombre }}</small>
+      </h1>
+      <mat-divider></mat-divider>
+
+      <mat-list>
+        <mat-list-item>
+          <p>
+            <Strong>Precio:</Strong> <small> {{ producto.precio }}</small>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <p>
+            <Strong>Descripcion:</Strong>
+            <small> {{ producto.descripcion }}</small>
+          </p>
+        </mat-list-item>
+
+        <mat-list-item>
+          <h3></h3>
+
+          <p>
+            <Strong>Disponibilidad:</Strong>
+            <small> {{ producto | disponibleItem }}</small>
+          </p>
+        </mat-list-item>
+
+        <mat-list-item>
+          <div class="row">
+            <div class="col-auto">
+              <p>
+                <Strong>Tallas:</Strong>
+              </p>
+            </div>
+            <div class="col-auto">
+              <div class="row">
+                <div class="col" *ngFor="let talla of producto.tallas">
+                  <!-- <small> {{ talla }}</small> -->
+                  <p-radioButton
+                    name="tallas"
+                    label="{{ talla }}"
+                    [value]="talla"
+                    [(ngModel)]="tallaSeleccionada"
+                  ></p-radioButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item>
+          <div class="row">
+            <div class="col-3">
+              <div class="p-field p-col-12 p-md-3">
+                <label for="vertical" style="display: block">Unidades:</label>
+                <p-inputNumber
+                  [(ngModel)]="unidades"
+                  [showButtons]="true"
+                  buttonLayout="horizontal"
+                  spinnerMode="horizontal"
+                  [step]="1"
+                  inputId="horizontal"
+                  decrementButtonClass="p-button-primary"
+                  incrementButtonClass="p-button-primary"
+                  incrementButtonIcon="pi pi-plus"
+                  decrementButtonIcon="pi pi-minus"
+                >
+                </p-inputNumber>
+              </div>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+
+      <app-whatsappbtn [producto]="producto"></app-whatsappbtn>
+
+      <br />
+
+      <div *ngIf="!seguirComprando" class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="agregarAlCarrito()"
+            >
+              Agregar Al Carrito
+            </button>
+          </div>
+
+          <div class="col">
+            <button mat-flat-button color="warn" (click)="regresar()">
+              Regresar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="seguirComprando" class="container-fluid">
+        <button mat-flat-button color="primary" (click)="irCarrito()">
+          Ir Al Carrito
+        </button>
+
+        <button mat-flat-button color="warn" (click)="regresar()">
+          Seguir Comprando OwO
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-image-cropper [src]="producto.img!"></app-image-cropper> -->
+
+  <app-footerpublic></app-footerpublic>
+</ng-template>
+
+<script></script>

@@ -1,0 +1,78 @@
+<p-galleria
+  [value]="images"
+  [responsiveOptions]="responsiveOptions"
+  [containerStyle]="{ 'max-width': '660px' }"
+  [circular]="true"
+  [numVisible]="5"
+>
+
+
+  <ng-template pTemplate="item" let-item>
+    <!-- <div class="d-none d-sm-block">
+      <lib-ngx-image-zoom
+        [thumbImage]="item"
+        [fullImage]="item"
+        [magnification]="1"
+        [enableScrollZoom]="true"
+        [enableLens]="true"
+        [lensWidth]="200"
+        [lensHeight]="200"
+        [circularLens]="true"
+        (click)="imageClick(activeIndex)"
+      ></lib-ngx-image-zoom>
+    </div> -->
+
+
+    <div class="d-block ">
+      <img [src]="item" style="width: 100%; display: block" (click)="imageClick(activeIndex)" />
+
+    </div>
+
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item  >
+    <div class="p-grid p-nogutter p-justify-center" >
+      <img class="img-mini" [src]="item" />
+    </div>
+  </ng-template>
+</p-galleria>
+
+<!-- Fullscreen vista -->
+<p-galleria
+  [value]="images"
+  [(visible)]="displayCustom"
+  [(activeIndex)]="activeIndex"
+  [responsiveOptions]="responsiveOptions"
+  [containerStyle]="{ 'max-width': '850px' }"
+  [numVisible]="55"
+  [circular]="true"
+  [fullScreen]="true"
+  [showItemNavigators]="true"
+  [showThumbnails]="false"
+  [baseZIndex]="100000000000000"
+>
+  <ng-template pTemplate="item" let-item>
+    <div class="d-none d-sm-block">
+      <lib-ngx-image-zoom
+        [thumbImage]="item"
+        [fullImage]="item"
+        [magnification]="1"
+        [enableScrollZoom]="true"
+        [enableLens]="true"
+        [lensWidth]="200"
+        [lensHeight]="200"
+        [circularLens]="true"
+      ></lib-ngx-image-zoom>
+    </div>
+
+    <div class="d-block d-sm-none">
+      <img [src]="item" style="width: 100%; display: block" />
+
+    </div>
+
+  </ng-template>
+  <ng-template pTemplate="thumbnail" let-item>
+    <div class="p-grid p-nogutter p-justify-center" >
+      <img [src]="item" style="display: block" />
+    </div>
+  </ng-template>
+</p-galleria>

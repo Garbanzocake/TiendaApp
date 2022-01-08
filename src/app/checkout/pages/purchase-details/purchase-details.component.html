@@ -1,0 +1,132 @@
+<div class="container-fluid p-0 m-0 col-12">
+  <app-menu></app-menu>
+</div>
+
+<div class="container-fluid p-0 m-0">
+  <div class="row p-0 m-0">
+    <div class="col-8">
+      <h2>Tus pedidos</h2>
+      <hr />
+
+      <ul>
+        <li *ngFor="let pedido of pedidos">
+          {{ pedido._id }}
+        </li>
+      </ul>
+
+      <!-- Fila Datos de Carrito border border-secondary mb-2 p-2 border-1 border-start-0 border-end-0 -->
+      <div *ngFor="let pedido of pedidos" class="row m-0 p-0">
+        <p-divider></p-divider>
+        <div class="col-6">
+          <h1 class="font-Ocra">Producto</h1>
+          <div class="row">
+            <div class="col-auto">
+              <img
+                [src]="pedido.producto!.img"
+                [alt]="pedido.producto!.nombre"
+                width="100"
+                class="p-shadow-4"
+              />
+            </div>
+            <div class="col">
+              <h2 style="margin-left: 5px">
+                {{ pedido.producto!.nombre }}
+              </h2>
+              <span>Talla: {{ pedido.talla }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <h1>Precio</h1>
+          <p>{{ pedido.producto!.precio }}</p>
+        </div>
+        <div class="col">
+          <h1>Cantidad</h1>
+          <p>{{ pedido.unidades }}</p>
+        </div>
+        <div class="col">
+          <h1>Subtotal</h1>
+          <p>{{ pedido.subtotal }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <h2>Detalle de la Compra</h2>
+
+      <p>
+        Tan pronto nos sea posible te contactaremos por Whatsapp para informarte
+        si tu orden se encuentra lista!
+      </p>
+
+      <div class="card">
+        <mat-list>
+          <mat-list-item>
+            <span *ngIf="venta.pedidos.length === 1">
+              <strong>Producto:</strong>
+              {{ venta.pedidos.length }}
+            </span>
+            <span *ngIf="venta.pedidos.length > 1">
+              <strong>Productos:</strong>
+              {{ venta.pedidos.length }}
+            </span>
+            <span class="spacer"></span>
+
+            <span>{{ venta.subtotal }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span>Envio</span>
+            <span class="spacer"></span>
+
+            <span *ngIf="venta.envio > 0">{{ venta.envio }}</span>
+            <span *ngIf="venta.envio === 0">Gratis!</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <span>Total: </span>
+            <span class="spacer"></span>
+            <span> {{ venta.total }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span>
+              <strong>Estado de tu compra:</strong>
+            </span>
+            <span class="spacer"></span>
+            <span>
+              {{ venta | completadaVenta }}
+            </span>
+          </mat-list-item>
+          <mat-list-item>
+            <span>
+              <strong>Fecha de Orden:</strong>
+            </span>
+
+            <span class="spacer"></span>
+
+            <span> {{ venta.fecha | date: "dd/MMMM/yyyy" }}</span>
+          </mat-list-item>
+          <mat-list-item>
+            <span> <strong>Fecha de Entrega :</strong> </span>
+            <span class="spacer"></span>
+
+            <span *ngIf="venta.fechaEntrega">
+              {{ venta.fechaEntrega | date: "dd/MMMM/yyyy" }}
+            </span>
+            <span *ngIf="!venta.fechaEntrega">
+              {{ venta | completadaVenta }}
+            </span>
+          </mat-list-item>
+        </mat-list>
+        <br />
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <hr />
+  <div class="row p-0 m-0">
+    <app-workingprogress></app-workingprogress>
+  </div>
+</div>

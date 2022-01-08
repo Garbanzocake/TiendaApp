@@ -1,0 +1,107 @@
+<div class="row m-0 p-0">
+  <div class="col">
+
+    <h1>Pedido ID: {{ pedido._id }}</h1>
+
+    <form (ngSubmit)="guardarPedido()" [formGroup]="miFormulario">
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Talla:</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="talla"
+            required
+            [value]="pedido.talla"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Subtotal del pedido</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="subtotal"
+            required
+            [value]="pedido.subtotal"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Unidades del pedido</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="unidades"
+            required
+            [value]="pedido.unidades"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2 p-0">
+        <mat-form-field fxFlex="100">
+          <mat-label>Estado de Pedido</mat-label>
+          <mat-select formControlName="despachado" required>
+            <mat-option *ngFor="let estado of estadoPedido" [value]="estado.id">
+              {{ estado.desc }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- <div class="container-fluid mb-4 p-0">
+      <div class="col">
+        <label for="pedidos-ids" class="form-label">Stickers/IDS: </label>
+
+        <p-chips id="inputPedidos" formControlName="stickers"></p-chips>
+      </div>
+    </div> -->
+
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-4">
+            <button mat-raised-button color="primary" type="submit">
+              <mat-icon *ngIf="!pedido._id">save</mat-icon>
+              <mat-icon *ngIf="pedido._id">edit</mat-icon>
+              {{ !pedido._id ? "Crear" : "Actualizar" }}
+            </button>
+          </div>
+
+          <div class="col-4">
+            <button
+              *ngIf="pedido._id"
+              mat-raised-button
+              color="warn"
+              (click)="borrar(pedido._id)"
+            >
+              <!-- *ngIf="heroe.id" -->
+              <mat-icon>delete</mat-icon>
+              Borrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="col-4 mt-2 mb-2">
+      <button mat-raised-button color="accent" (click)="regresar()">
+
+        <mat-label>Regresar</mat-label>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col">
+    <h2>Informacion del Producto</h2>
+
+
+    <app-producto-info [producto]="producto"></app-producto-info>
+
+    <!-- <app-tabla-pedidos [pedidosInput]="pedidos1"></app-tabla-pedidos> -->
+  </div>
+</div>

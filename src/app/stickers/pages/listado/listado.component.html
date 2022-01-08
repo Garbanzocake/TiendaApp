@@ -1,0 +1,39 @@
+<h1>Listado de Stickers</h1>
+<mat-divider></mat-divider>
+<br />
+
+
+<div class="container-fluid m-0 p-0">
+  <div class="row">
+    <div *ngFor="let item of stickers" class="col-12 col-sm-2 mb-4 d-flex flex-wrap"   >
+
+      <div>
+        <h2>{{ item.nombre }}</h2>
+        <img
+          class="img-fluid"
+          src="{{ item.img }}"
+          oncontextmenu="return false"
+          alt="{{ item.nombre }}"
+        />
+
+        <h3>
+          <strong> Precio: </strong>
+          <span> {{ item.precio | currency: "COP$":"symbol":"5.0-2" }}</span>
+        </h3>
+
+        <div class="row d-inline">
+          <button mat-button [routerLink]="['/stickers', item._id]" color="primary" >Ver Sticker   </button>
+          <button *ngIf="!modo" mat-button [routerLink]="['/stickers/editar', item._id]" color="secondary" >Editar Sticker</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+</div>
+
+

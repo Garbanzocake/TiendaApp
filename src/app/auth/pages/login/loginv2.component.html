@@ -1,0 +1,60 @@
+<div class="col animate__animated animate__fadeIn">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="login()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Correo Electronico:</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            formControlName="correo"
+          />
+          <!-- <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div> -->
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Password:</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            formControlName="password"
+          />
+        </div>
+        <div class="mb-3 form-check">
+          <label class="form-check-label" for="exampleCheck1"
+            >¿No tienes cuenta?
+          </label>
+          <a routerLink="/auth/registro" class="txt2"> Crea una aquí </a>
+        </div>
+
+
+
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="miFormulario.invalid"
+        >
+          Login
+        </button>
+      </form>
+
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

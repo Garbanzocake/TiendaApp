@@ -1,0 +1,33 @@
+.footer-redes a {
+  display: inline-block;
+  padding: 10px;
+  color: gray;
+  text-align: center;
+  text-decoration: none;
+
+  letter-spacing: 0;
+}
+
+.footer-textos  {
+  color: rgb(109, 109, 109);
+  padding-top: 10px;
+  font-family: ocra-bt;
+}
+
+
+
+.bg-gray {
+  background-color: rgba(169, 169, 169, 0.3);
+
+
+
+}
+
+  .footer{
+   /* position: fixed;
+  bottom: 0; */
+
+z-index: 1;
+   /* left: 0;
+  right: 0; */
+}

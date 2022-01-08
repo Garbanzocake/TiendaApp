@@ -1,0 +1,81 @@
+<div
+  class="
+
+    animate__animated animate__fadeInLeft animate__delay-1s
+  "
+>
+  <mat-sidenav-container style="height: 100vh;">
+    <mat-sidenav #sidenav mode="push">
+      <mat-toolbar color="primary">
+        <span>Menu</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <mat-nav-list>
+        <a routerLink="../store/tienda" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">home</mat-icon>
+          <span>HomePage</span>
+        </a>
+
+        <a routerLink="./listado" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">label</mat-icon>
+          <span>Listado de Pedidos</span>
+        </a>
+
+        <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">add</mat-icon>
+          <span>Agregar Pedidos</span>
+        </a>
+
+        <a routerLink="./buscar" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">search</mat-icon>
+          <span>Buscar Pedidos</span>
+        </a>
+
+        <a routerLink="../productos" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">shopping_basket</mat-icon>
+          <span>Administrar Productos</span>
+        </a>
+
+        <a routerLink="../stickers" mat-list-item (click)="sidenav.toggle()">
+          <mat-icon mat-list-icon color="primary">fireplace</mat-icon>
+          <span>Administrar Stickers</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-toolbar>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+
+      <span class="spacer"></span>
+      <a routerLink="/checkout/cart" style="padding-right: 5px;" >
+        <i
+          class="pi pi-shopping-cart p-mr-4 p-text-secondary"
+          pBadge
+          style="font-size: 1.5rem;"
+          value="{{ itemsCarritoPedido.length }}"
+        ></i>
+      </a>
+
+      <h2 >Hola {{ usuario.nombre }}!</h2>
+
+      <button mat-button (click)="logOut()">
+        Cerrar Sesion
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-container>
+</div>
+
+<!-- <pre>{{usuario | json}}</pre> -->
+

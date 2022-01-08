@@ -1,0 +1,120 @@
+<div class="container-fluid mt-4 p-0">
+  <div >
+    <div class="animate__animated animate__fadeIn animate__delay-1s">
+      <!-- Fila de productos y subtotal -->
+      <div class="row m-0 p-0">
+        <div class="col">
+          <!-- Fila Encabezados  mb-2-->
+
+          <div class="row m-0 p-0">
+            <div class="col-8">
+              <h1 class="font-Ocra">Producto</h1>
+            </div>
+            <div class="col"><h1>Precio</h1></div>
+            <div class="col"><h1>Cantidad</h1></div>
+            <div class="col"><h1>Subtotal</h1></div>
+          </div>
+
+          <!-- Fila Datos de Carrito border border-secondary mb-2 p-2 border-1 border-start-0 border-end-0 -->
+          <div *ngFor="let pedido of pedidos" class="row m-0 p-0">
+            <p-divider></p-divider>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-auto">
+                  <img
+                    [src]="pedido.producto!.img"
+                    [alt]="pedido.producto!.nombre"
+                    width="100"
+                    class="p-shadow-4"
+                  />
+                </div>
+                <div class="col">
+                  <h2 style="margin-left: 5px">
+                    {{ pedido.producto!.nombre }}
+                  </h2>
+                  <span>Talla: {{ pedido.talla }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <h2>{{ pedido.producto!.precio }}</h2>
+            </div>
+            <div class="col">
+              <h2>{{ pedido.unidades }}</h2>
+              <!-- <a (click)="borrarPedido(pedido._id!)">Eliminar</a> -->
+              <a (click)="borrarPedidoCarrito(pedido._id!)">Eliminar</a>
+            </div>
+            <div class="col">
+              <h2>{{ pedido.subtotal }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fila de productos y subtotal -->
+
+      <!-- Fila de envios y total -->
+      <div class="row m-0 p-0">
+        <p-divider></p-divider>
+        <div class="col-8">
+          <h1>Coste de Envio!</h1>
+        </div>
+        <div class="col-4">
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <p>Subtotal</p>
+            </div>
+            <div class="col-3">
+              <p>{{ venta.subtotal }}</p>
+            </div>
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <p>Envio</p>
+            </div>
+            <div class="col-3">
+              <p *ngIf="venta.subtotal >= 40000; else costeEnvio">
+                Envio Gratis
+              </p>
+              <ng-template #costeEnvio>
+                <p>{{ tarifaEnvio }}</p>
+              </ng-template>
+            </div>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-3">
+              <h1>Total</h1>
+            </div>
+            <div class="col-3">
+              <p *ngIf="venta.subtotal >= 40000; else costeTotal">
+                {{ venta.subtotal }}
+              </p>
+              <ng-template #costeTotal>
+                <p>{{ venta.subtotal + tarifaEnvio}}</p>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="row justify-content-between m-0 p-0">
+            <div class="col-3"></div>
+            <div class="col-auto">
+              <button
+                pButton
+                (click)="prepararCompra()"
+                routerLink="/checkout/shipping"
+                label="Continuar Compra"
+                class="p-button-raised p-button-info p-button-text"
+              ></button>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fila de envios y total -->
+    </div>
+  </div>
+
+
+</div>

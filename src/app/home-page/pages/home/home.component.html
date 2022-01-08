@@ -1,0 +1,8 @@
+<app-loading-screen *ngIf="loading; else divcargado"> </app-loading-screen>
+<ng-template #divcargado>
+  <div class="container-fluid p-0 m-0">
+    <router-outlet>
+
+    </router-outlet>
+  </div>
+</ng-template>

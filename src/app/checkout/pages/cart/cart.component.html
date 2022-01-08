@@ -1,0 +1,40 @@
+<!-- Menu navbar -->
+<div class="container-fluid p-0 m-0 col-12">
+  <app-menu [itemsCarrito]="pedidosCarrito"  ></app-menu>
+</div>
+
+<div class="container-fluid m-0 p-0">
+  <div class="row p-0 m-0">
+    <div class="col mb-5">
+      <app-pedidos-cart
+        *ngIf="carrito"
+        [pedidosCarrito]="pedidosCarrito"
+        (onNuevoCarrito)="establecerNuevoCarrito($event)"
+
+      ></app-pedidos-cart>
+      <div *ngIf="!carrito" class="container-fluid">
+        <div class="row m-0 p-0 d-flex justify-content-center">
+          <div class="col-4">
+            <h1>No hay productos en el carrito OwO</h1>
+            <a  routerlink="/store/tienda">              
+                Ir a la tienda
+
+              
+            </a>
+            <a href="/store/tienda">Ir a la tienda</a>
+            <img
+              class="img-thumbnail"
+              src="../../../../assets/img/UIBlitz/estamostrabajando.png"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- <app-tabla-pedidos [Usuario]="usuario.correo"></app-tabla-pedidos> -->
+      <!-- <app-tabla-pedidos [pedidosCarrito]="pedidosCarrito"></app-tabla-pedidos> -->
+    </div>
+  </div>
+
+  <!-- <app-footerpublic></app-footerpublic> -->
+</div>
